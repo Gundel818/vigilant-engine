@@ -1,0 +1,1 @@
+Le fichier CSV prêt à être importé pour NSG, sera mis dans ce dossier
