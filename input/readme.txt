@@ -1,1 +1,1 @@
-Mettre son fichier CSV de cellules exporté de l'appli EA ici
+Mettre ses fichiers CSV de cellules et d'indentifications exportés de l'appli EA ici
