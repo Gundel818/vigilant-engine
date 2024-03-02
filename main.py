@@ -1,30 +1,41 @@
-from converter import Converter
 import os
+
+from converterv2 import Converterv2
 
 dir = os.getcwd() + "/input"
 
-files = {}
-for i, file in enumerate(os.listdir(dir), start=1):
-    if file.endswith('.csv'):
-        files[i] = file
-        print(f"{i}. {file}")
+def choosingFile(startName : str) -> str :
 
-# Demander à l'utilisateur de saisir le numéro du fichier désiré
-numero_fichier = int(input("Entrez le numéro du fichier que vous souhaitez sélectionner : "))
+    files = {}
+    for i, file in enumerate(os.listdir(dir), start=1):
+        if file.endswith('.csv') and file.startswith(startName):
+            files[i] = file
+            print(f"{i}. {file}")
 
-# Vérifier si le numéro de fichier est valide
-if numero_fichier in files:
-    filename = files[numero_fichier]
-    print("Vous avez sélectionné le fichier :", filename)
-else:
-    print("Numéro de fichier invalide.")
-    exit(1)
+    # Demander à l'utilisateur de saisir le numéro du fichier désiré
+    num_fichier_cells = int(input("Entrez le numéro du fichier que vous souhaitez sélectionner : "))
+    
+    # Vérifier si le numéro de fichier est valide
+    if num_fichier_cells in files:
+        filename = files[num_fichier_cells]
+        print("Vous avez sélectionné le fichier :", filename)
+        
+    else:
+        print("Numéro de fichier invalide.")
+        exit(1)
+    return filename
 
 # Concaténer le chemin du dossier avec le nom du fichier saisi
-pathfilename = os.path.join(dir, filename)
+print("Choix du fichier de cellules")
+filenameCells = choosingFile('Export')
+pathfilenameCells = os.path.join(dir, filenameCells)
 
-converter = Converter(pathfilename)
+print("Choix du fichier d'identifications")
+filenameID = choosingFile('Identifications')
+pathfilenameID = os.path.join(dir, filenameID)
+
+#converter = Converter(pathfilename)
+#converter.convertToNewFile()
+converter = Converterv2(pathfilenameCells, pathfilenameID)
 converter.convertToNewFile()
-
-
 
