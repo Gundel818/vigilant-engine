@@ -31,7 +31,9 @@ class Converter:
         # Renommage colonnes
         df = df.rename(columns={"eNB": "ECellID", "NOM" : "CellName", "LAT" : "Latitude", "LON" : "Longitude", "ARFCN" : "EARFCN"})
 
-        ope = input("Quel opérateur ? (Orange, Bytel, ..) ")
+        ope = input("Quel opérateur ? (Orange, ByTel, ..) ")
+        # TODO : mettre en miniscule l'input et les valeurs de la colonne OP pour éviter problèmes
+        # TODO : Try except
         self.setOPE(ope)
         df = df.loc[df['OP'] == ope]
         print(df.head())
