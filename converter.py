@@ -15,19 +15,18 @@ class Converter:
     def removeUselessColumnsandData(self):
         df = self.__df
 
-        # ECellID,CellName,Longitude,Latitude,PCI,EARFCN,Azimuth
         df = df.drop(columns=['TAC', 'Date', 'FirstDate', 'LastDate', 'Flag', 'RF'])
 
         # Supprimer lignes avec colonne 'NOM' vide
+        # Garder uniquement lignes sans 'Données insuffisantes' dans colonne 'NOM'
         df = df.dropna(subset=['NOM'])
-
-        # Garder lignes sans 'Données insuffisantes' dans colonne 'NOM
         df = df[df['NOM'] != 'Données insuffisantes']
 
         self.__df = df
 
     def renameAndReorderColumns(self):
         df = self.__df
+
         # Renommage colonnes
         df = df.rename(columns={"eNB": "ECellID", "NOM" : "CellName", "LAT" : "Latitude", "LON" : "Longitude", "ARFCN" : "EARFCN"})
 
@@ -36,7 +35,6 @@ class Converter:
         # TODO : Try except
         self.setOPE(ope)
         df = df.loc[df['OP'] == ope]
-        print(df.head())
         
         # Calcul ECellID
         df['ECellID'] = (df['ECellID'] * 256) + df['CID']
