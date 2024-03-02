@@ -1,6 +1,6 @@
 import os
 
-from converterv2 import Converterv2
+from converter import Converter
 
 dir = os.getcwd() + "/input"
 
@@ -36,6 +36,6 @@ pathfilenameID = os.path.join(dir, filenameID)
 
 #converter = Converter(pathfilename)
 #converter.convertToNewFile()
-converter = Converterv2(pathfilenameCells, pathfilenameID)
+converter = Converter(pathfilenameCells, pathfilenameID)
 converter.convertToNewFile()
 

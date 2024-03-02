@@ -1,7 +1,7 @@
 import pandas as pa
 from datetime import datetime
 
-class Converterv2:
+class Converter:
 
     def __init__(self, cellfile : str, idfile : str):
         self.__df = pa.read_csv(cellfile, header=0, sep=';', index_col=False)
