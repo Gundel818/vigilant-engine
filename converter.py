@@ -1,5 +1,4 @@
 import pandas as pa
-import os
 from datetime import datetime
 
 class Converter:
@@ -9,8 +8,6 @@ class Converter:
         self.__df = pa.read_csv(inputfile, header=0, sep=';', index_col=False)
         self.__df.set_index('ID', inplace=True)
         self.__ope = ""
-
-
 
     def removeUselessColumnsandData(self):
         df = self.__df
@@ -58,7 +55,7 @@ class Converter:
     def save(self):
         ajd = datetime.now()
 
-        date_actu = ajd.strftime("%Y-%m-%d_%H:%M:%S")
+        date_actu = ajd.strftime("%Y-%m-%d_%H_%M_%S")
         save = 'NSG_' + self.getOPE() + "_" + date_actu + '.csv'
         self.__df.to_csv('output/' + save, index=False)
 
