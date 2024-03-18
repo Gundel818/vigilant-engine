@@ -8,4 +8,4 @@ Requis :
 Bibliothèques utilisés :
 
 - os 
-- pandas
+- pandas (Pour l'installer : `pip install pandas`)
