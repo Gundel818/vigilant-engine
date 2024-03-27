@@ -5,7 +5,6 @@ from converter import Converter
 dir = os.getcwd() + "/input"
 
 def choosingFile(startName : str) -> str :
-
     files = {}
     for i, file in enumerate(os.listdir(dir), start=1):
         if file.endswith('.csv') and file.startswith(startName):
@@ -13,7 +12,10 @@ def choosingFile(startName : str) -> str :
             print(f"{i}. {file}")
 
     # Demander à l'utilisateur de saisir le numéro du fichier désiré
-    num_fichier_cells = int(input("Entrez le numéro du fichier que vous souhaitez sélectionner : "))
+    num_fichier_cells = int(input("Entrez le numéro du fichier que vous souhaitez sélectionner ou entrez 0 pour quitter: "))
+    
+    if num_fichier_cells == 0:
+        exit(0)
     
     # Vérifier si le numéro de fichier est valide
     if num_fichier_cells in files:
@@ -26,11 +28,11 @@ def choosingFile(startName : str) -> str :
     return filename
 
 # Concaténer le chemin du dossier avec le nom du fichier saisi
-print("Choix du fichier de cellules")
+print("Choix du fichier de cellules :")
 filenameCells = choosingFile('Export')
 pathfilenameCells = os.path.join(dir, filenameCells)
 
-print("Choix du fichier d'identifications")
+print("Choix du fichier d'identifications :")
 filenameID = choosingFile('Identifications')
 pathfilenameID = os.path.join(dir, filenameID)
 
