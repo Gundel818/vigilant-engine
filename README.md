@@ -6,6 +6,5 @@ Requis :
 - Fichier CSV des identifications exporté depuis EA
 
 Bibliothèques utilisés :
-
 - os 
 - pandas (Pour l'installer : `pip install pandas`)

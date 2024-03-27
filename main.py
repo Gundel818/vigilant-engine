@@ -35,7 +35,6 @@ filenameID = choosingFile('Identifications')
 pathfilenameID = os.path.join(dir, filenameID)
 
 #converter = Converter(pathfilename)
-#converter.convertToNewFile()
 converter = Converter(pathfilenameCells, pathfilenameID)
 converter.convertToNewFile()
 

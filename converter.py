@@ -34,17 +34,22 @@ class Converter:
     def renameAndReorderColumns(self):
         # Récup les bonnes coordonées depuis le fichier d'identifications pour remplacer sur celui des cellules
         self.mergingIdinCells()
+        opeList = ["ORANGE", "BYTEL", "SFR", "FREE"]
         
         df = self.__df
 
         # Renommage colonnes                                            
         df = df.rename(columns={"eNB": "ECellID", "NOM" : "CellName", "Lat" : "Latitude", "Lon" : "Longitude", "ARFCN" : "EARFCN"})
+        df['OP'] = df['OP'].str.upper()
 
-        ope = input("Quel opérateur ? (Orange, ByTel, ..) ")
-        # TODO : mettre en miniscule l'input et les valeurs de la colonne OP pour éviter problèmes
-        # TODO : Try except
+        ope = input("Quel opérateur ? (Orange, ByTel, ..) : ")
+
         self.setOPE(ope)
-        df = df.loc[df['OP'] == ope]
+        if not self.getOPE() in opeList:
+            print("Opérateur non reconnu.")
+            exit(1)
+
+        df = df.loc[df['OP'] == self.getOPE()]
 
         # Calcul ECellID
         df['ECellID'] = (df['ECellID'] * 256) + df['CID']
@@ -71,8 +76,10 @@ class Converter:
         date_actu = ajd.strftime("%Y-%m-%d_%H_%M_%S")
         save = 'NSG_' + self.getOPE() + "_" + date_actu + '.csv'
         self.__df.to_csv('output/' + save, index=False)
+        print("Fichier", save, "sauvegardé")
 
     def convertToNewFile(self):
         self.removeUselessColumnsandData()
         self.renameAndReorderColumns()
         self.save()
+        print("Conversion terminée.")
